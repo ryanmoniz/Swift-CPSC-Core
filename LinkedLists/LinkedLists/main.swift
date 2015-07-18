@@ -65,5 +65,32 @@ public class LinkedList<T: Equatable> {
         
         current = current?.next
     } //end while
+    
+    //remove item from linked list at specific index
+    func removeItem(index : Int) {
+        var current: DLLNode<T>? = head
+        var trailer : DLLNode<T>? //previous visited node
+        var listIndex = 0
+        
+        //determine if the removal is at the head first
+        if index == 0 {
+            current = current?.next
+            head = current!
+            return
+        }
+        
+        //iterate through the remaining items
+        while current != nil {
+            if listIndex == index {
+                //redirect the trailer and next pointers
+                trailer!.next = current?.next
+            }
+            
+            trailer = current
+            current = current?.next
+            listIndex++
+        }
+    }
 }
+
 
