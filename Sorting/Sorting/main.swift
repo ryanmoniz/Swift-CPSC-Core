@@ -112,3 +112,31 @@ print("quickSort()")
 print("unsorted numberList: \(numberList)")
 quickSort(&numberList, left:0, right: numberList.count-1)
 print("sorted numberList: \(numberList)")
+
+//generics version of quicksort
+func quicksort<T: Comparable>(inout arr: [T], left: Int, right: Int) {
+    if left < right {
+        let p = partion(&arr, left:left, right:right)
+        quicksort(&arr, left:left, right:p - 1)
+        quicksort(&arr, left:p + 1, right:right)
+    }
+}
+
+func swap<T>(inout arr: [T], a: Int, b: Int) {
+    let temp = arr[a]
+    arr[a] = arr[b]
+    arr[b] = temp
+}
+
+func partion<T: Comparable>(inout arr: [T], left: Int, right: Int) -> Int {
+    let pivotValue = arr[right]
+    var storeIndex = left
+    for i in left..<right {
+        if arr[i] < pivotValue {
+            swap(&arr, a:i, b:storeIndex)
+            storeIndex += 1
+        }
+    }
+    swap(&arr, a:storeIndex, b:right)
+    return storeIndex
+}
