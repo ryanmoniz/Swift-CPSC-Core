@@ -41,3 +41,33 @@ func insertionSort() {
 }
 
 insertionSort()
+
+numberList = [8,2,4,6,11,13,3,7,4,3]
+//bubble sort
+//works by comparing values and swapping with small values
+//performance: O(n^2)
+
+func bubbleSort() {
+    print("unsorted numberList: \(numberList)")
+    var x, y, z, passes, key : Int
+    
+    //track collection iterations
+    for x in 0..<numberList.count {
+        passes = (numberList.count - 1) - x
+        
+        //use shorthand range operator
+        for y in 0..<passes {
+            key = numberList[y]
+            
+            //compare and rank values (bubble up to the top)
+            if key > numberList[y+1] {
+                z = numberList[y+1] //get value to swap
+                numberList[y+1] = key //swap key
+                numberList[y] = z //swap lower value
+            }
+        } //end for loop
+    } //end for loop
+    print("sorted numberList: \(numberList)")
+}
+
+bubbleSort()
